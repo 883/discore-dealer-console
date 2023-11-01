@@ -6,7 +6,7 @@
         </div>
         <div class="login">
             <v-form class="login form"
-                    @submit="next">
+                    @submit="login">
                 <v-text-field label="メールアドレス"
                               :color="$baseColor1"
                               v-model="form.email.value"
