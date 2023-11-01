@@ -64,7 +64,7 @@ export default {
                 .then(res => {
                     this.$cookies.set("access_token", res.data.access_token.token, 60*60*24);
                     this.$cookies.set("dealer_id", res.data.dealer_id, 60*60*24);
-                    this.$cookies.set("dealer_member_id", res.data.dealer_id, 60*60*24);
+                    this.$cookies.set("manager_id", res.data.manager_id, 60*60*24);
 
                     this.$router.push({
                         path: '/myPage',

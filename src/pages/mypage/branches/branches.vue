@@ -67,7 +67,7 @@
 
 <script>
     import AddBranchModal from "@/pages/mypage/branches/components/addBranchModal.vue";
-    import BranchModal from "@/pages/mypage/branches/components/branchModal.vue";
+    import BranchModal from "@/components/branch/branchModal.vue";
 
     const LIMIT = 10;
 

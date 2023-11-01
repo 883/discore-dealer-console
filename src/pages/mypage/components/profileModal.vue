@@ -29,26 +29,26 @@
                 <v-tab-item>
                     <v-card-text>
                         <v-text-field label="名前"
-                                      v-model="member.name.value"
-                                      :error-messages="member.name.errorMessage"
+                                      v-model="manager.name.value"
+                                      :error-messages="manager.name.errorMessage"
                                       :color="$baseColor1"></v-text-field>
                         <v-text-field label="メールアドレス"
-                                      v-model="member.email.value"
+                                      v-model="manager.email.value"
                                       :color="$baseColor1"
                                       readonly
-                                      @click="$refs.updateEmailModal.open(member.email.value)"></v-text-field>
+                                      @click="$refs.updateEmailModal.open(manager.email.value)"></v-text-field>
                         <v-text-field label="パスワード"
-                                      v-model="member.password.value"
-                                      :error-messages="member.password.errorMessage"
+                                      v-model="manager.password.value"
+                                      :error-messages="manager.password.errorMessage"
                                       :color="$baseColor1"></v-text-field>
                         <v-text-field label="パスワード（確認）"
-                                      v-model="member.passwordConfirm.value"
-                                      :error-messages="member.passwordConfirm.errorMessage"
+                                      v-model="manager.passwordConfirm.value"
+                                      :error-messages="manager.passwordConfirm.errorMessage"
                                       :color="$baseColor1"></v-text-field>
                         <v-btn depressed
                                :style="'background-color: '+$baseColor1+'; background-image: linear-gradient(135deg, '+$baseColor1+' 0%, '+$baseColor2+' 100%);'"
                                dark
-                               @click="saveMember">保存</v-btn>
+                               @click="saveManager">保存</v-btn>
                     </v-card-text>
                 </v-tab-item>
             </v-tabs>
@@ -77,7 +77,7 @@
                         errorMessage: null
                     },
                 },
-                member: {
+                manager: {
                     id: {
                         value: null
                     },
@@ -115,7 +115,7 @@
                         errorMessage: null
                     },
                 };
-                this.member = {
+                this.manager = {
                     id: {
                         value: null
                     },
@@ -143,14 +143,14 @@
              */
             reload()
             {
-                this.$axios.get("/member")
+                this.$axios.get("/manager")
                     .then(res => {
-                        this.member.id.value = res.data.id;
-                        this.member.name.value = res.data.name;
-                        this.member.email.value = res.data.email;
+                        this.manager.id.value = res.data.id;
+                        this.manager.name.value = res.data.name;
+                        this.manager.email.value = res.data.email;
                         this.isRoot = res.data.is_root;
                         this.isView = true;
-                        this.oldMember = JSON.parse(JSON.stringify(this.member));
+                        this.oldManager = JSON.parse(JSON.stringify(this.manager));
                     });
                 this.$axios.get()
                     .then(res => {
@@ -191,26 +191,26 @@
             /**
              * メンバー情報を保存
              */
-            saveMember()
+            saveManager()
             {
-                this.member.name.errorMessage = null;
-                this.member.password.errorMessage = null;
-                this.member.passwordConfirm.errorMessage = null;
+                this.manager.name.errorMessage = null;
+                this.manager.password.errorMessage = null;
+                this.manager.passwordConfirm.errorMessage = null;
 
                 var params = {};
-                if (this.oldMember.name.value !== this.member.name.value) {
-                    params.name = this.member.name.value;
+                if (this.oldManager.name.value !== this.manager.name.value) {
+                    params.name = this.manager.name.value;
                 }
-                if (this.member.password.value != null) {
-                    params.password = this.member.password.value;
-                    params.password_confirm = this.member.passwordConfirm.value;
+                if (this.manager.password.value != null) {
+                    params.password = this.manager.password.value;
+                    params.password_confirm = this.manager.passwordConfirm.value;
                 }
 
-                this.$axios.patch("/member", params)
+                this.$axios.patch("/manager", params)
                     .then(res => {
                         alert("メンバー情報を更新しました。");
-                        this.member.password.value = null;
-                        this.member.passwordConfirm.value = null;
+                        this.manager.password.value = null;
+                        this.manager.passwordConfirm.value = null;
                     })
                     .catch(e => {
                         if (e.response.status === 400 &&
@@ -219,17 +219,17 @@
                                 var error = e.response.data.errors[i];
                                 if (error.parameter === "name") {
                                     if (error.message === "not null") {
-                                        this.member.name.errorMessage = "入力必須";
+                                        this.manager.name.errorMessage = "入力必須";
                                     }
                                 } else if (error.parameter === "password") {
                                     if (error.message === "not null") {
-                                        this.member.password.errorMessage = "入力必須";
+                                        this.manager.password.errorMessage = "入力必須";
                                     } else if (error.message === "invalid value") {
-                                        this.member.password.errorMessage = "入力値が異常です";
+                                        this.manager.password.errorMessage = "入力値が異常です";
                                     }
                                 } else if (error.parameter === "password") {
                                     if (error.message === "invalid value") {
-                                        this.member.passwordConfirm.errorMessage = "入力必須";
+                                        this.manager.passwordConfirm.errorMessage = "入力必須";
                                     }
                                 }
                             }

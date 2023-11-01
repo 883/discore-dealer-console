@@ -54,7 +54,7 @@
             {
                 this.form.email.errorMessage = null;
 
-                this.$axios.patch("member", {
+                this.$axios.patch("manager", {
                     email: this.form.email.value
                 })
                     .then(res => {
