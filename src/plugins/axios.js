@@ -9,8 +9,8 @@ export default {
          * @type {AxiosInstance}
          */
         const http = axios.create({
-            baseURL: "https://8.2.shino.app.discore.jp/api/v1/dealer",
-            //baseURL: "https://app.discore.jp/api/v1/dealer",
+            baseURL: "https://8.2.shino.app.discore.jp/api/v1/manager",
+            //baseURL: "https://app.discore.jp/api/v1/manager",
             timeout: 100000,
             httpsAgent: new https.Agent({keepAlive: true})
         });

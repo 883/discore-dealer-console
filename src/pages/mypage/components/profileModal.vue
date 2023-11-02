@@ -143,7 +143,7 @@
              */
             reload()
             {
-                this.$axios.get("/manager")
+                this.$axios.get("")
                     .then(res => {
                         this.manager.id.value = res.data.id;
                         this.manager.name.value = res.data.name;
@@ -152,7 +152,7 @@
                         this.isView = true;
                         this.oldManager = JSON.parse(JSON.stringify(this.manager));
                     });
-                this.$axios.get()
+                this.$axios.get("/dealer")
                     .then(res => {
                         this.dealer.name.value = res.data.name;
                         this.oldDealer = JSON.parse(JSON.stringify(this.dealer));
@@ -170,7 +170,7 @@
                     params.name = this.dealer.name.value;
                 }
 
-                this.$axios.patch("", params)
+                this.$axios.patch("/dealer", params)
                     .then(res => {
                         alert("ディーラー情報を更新しました。");
                     })
@@ -206,7 +206,7 @@
                     params.password_confirm = this.manager.passwordConfirm.value;
                 }
 
-                this.$axios.patch("/manager", params)
+                this.$axios.patch("", params)
                     .then(res => {
                         alert("メンバー情報を更新しました。");
                         this.manager.password.value = null;
