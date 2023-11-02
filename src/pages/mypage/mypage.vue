@@ -21,6 +21,21 @@
                             </v-list-item-title>
                         </v-list-item-content>
                     </v-list-item>
+                    <v-list-item @click="selectMainMenu(PAGE_MANAGERS)">
+                        <v-list-item-content>
+                            <v-badge v-if="alertCount.managers > 0"
+                                     :content="alertCount.managers"
+                                     inline
+                                     :color="$baseColor1">
+                                <v-list-item-title>
+                                    マネージャー
+                                </v-list-item-title>
+                            </v-badge>
+                            <v-list-item-title v-else>
+                                マネージャー
+                            </v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
                 </v-list-item-group>
             </v-list>
         </v-navigation-drawer>
@@ -55,6 +70,8 @@
         <v-main>
             <Branches v-if="page === PAGE_BRANCHES"
                       @reload="reload"></Branches>
+            <Managers v-else-if="page === PAGE_MANAGERS"
+                      @reload="reload"></Managers>
         </v-main>
         <ProfileModal ref="profileModal"></ProfileModal>
     </v-app>
@@ -65,18 +82,22 @@
 
     import ProfileModal from "@/pages/mypage/components/profileModal.vue";
     import Branches from "@/pages/mypage/branches/branches.vue";
+    import Managers from "@/pages/mypage/managers/managers.vue";
 
     const PAGE_BRANCHES = "branches";
+    const PAGE_MANAGERS = "managers";
 
     export default {
         name: "mypage",
         components: {
+            Managers,
             Branches,
             ProfileModal,
         },
         data () {
             return {
                 PAGE_BRANCHES: PAGE_BRANCHES,
+                PAGE_MANAGERS: PAGE_MANAGERS,
 
                 logoImg: LogoImg,
 
@@ -107,6 +128,9 @@
                 if (to === PAGE_BRANCHES) {
                     this.pageName = "支店";
                     this.pageNum = 0;
+                } else if (to === PAGE_MANAGERS) {
+                    this.pageName = "マネージャー";
+                    this.pageNum = 1;
                 }
             },
 
