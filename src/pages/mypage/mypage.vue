@@ -36,6 +36,21 @@
                             </v-list-item-title>
                         </v-list-item-content>
                     </v-list-item>
+                    <v-list-item @click="selectMainMenu(PAGE_STAFFS)">
+                        <v-list-item-content>
+                            <v-badge v-if="alertCount.staffs > 0"
+                                     :content="alertCount.staffs"
+                                     inline
+                                     :color="$baseColor1">
+                                <v-list-item-title>
+                                    スタッフ
+                                </v-list-item-title>
+                            </v-badge>
+                            <v-list-item-title v-else>
+                                スタッフ
+                            </v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
                 </v-list-item-group>
             </v-list>
         </v-navigation-drawer>
@@ -72,6 +87,8 @@
                       @reload="reload"></Branches>
             <Managers v-else-if="page === PAGE_MANAGERS"
                       @reload="reload"></Managers>
+            <Staffs v-else-if="page === PAGE_STAFFS"
+                      @reload="reload"></Staffs>
         </v-main>
         <ProfileModal ref="profileModal"></ProfileModal>
     </v-app>
@@ -83,13 +100,16 @@
     import ProfileModal from "@/pages/mypage/components/profileModal.vue";
     import Branches from "@/pages/mypage/branches/branches.vue";
     import Managers from "@/pages/mypage/managers/managers.vue";
+    import Staffs from "@/pages/mypage/staffs/staffs.vue";
 
     const PAGE_BRANCHES = "branches";
     const PAGE_MANAGERS = "managers";
+    const PAGE_STAFFS = "staffs";
 
     export default {
         name: "mypage",
         components: {
+            Staffs,
             Managers,
             Branches,
             ProfileModal,
@@ -98,6 +118,7 @@
             return {
                 PAGE_BRANCHES: PAGE_BRANCHES,
                 PAGE_MANAGERS: PAGE_MANAGERS,
+                PAGE_STAFFS: PAGE_STAFFS,
 
                 logoImg: LogoImg,
 
@@ -131,6 +152,9 @@
                 } else if (to === PAGE_MANAGERS) {
                     this.pageName = "マネージャー";
                     this.pageNum = 1;
+                } else if (to === PAGE_STAFFS) {
+                    this.pageName = "スタッフ";
+                    this.pageNum = 2;
                 }
             },
 
