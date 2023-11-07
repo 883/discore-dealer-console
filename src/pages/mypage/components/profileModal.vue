@@ -3,7 +3,7 @@
         <v-card>
             <DialogHeader title="プロフィール"
                           @close="isView = false"> </DialogHeader>
-            <v-tabs color="#9599E2">
+            <v-tabs :color="$baseColor1">
                 <v-tab> ディーラー情報 </v-tab>
                 <v-tab> メンバー情報 </v-tab>
 

@@ -51,6 +51,36 @@
                             </v-list-item-title>
                         </v-list-item-content>
                     </v-list-item>
+                    <v-list-item @click="selectMainMenu(PAGE_ITEMS)">
+                        <v-list-item-content>
+                            <v-badge v-if="alertCount.items > 0"
+                                     :content="alertCount.items"
+                                     inline
+                                     :color="$baseColor1">
+                                <v-list-item-title>
+                                    商品
+                                </v-list-item-title>
+                            </v-badge>
+                            <v-list-item-title v-else>
+                                商品
+                            </v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+                    <v-list-item @click="selectMainMenu(PAGE_SHOPS)">
+                        <v-list-item-content>
+                            <v-badge v-if="alertCount.items > 0"
+                                     :content="alertCount.items"
+                                     inline
+                                     :color="$baseColor1">
+                                <v-list-item-title>
+                                    取引店舗
+                                </v-list-item-title>
+                            </v-badge>
+                            <v-list-item-title v-else>
+                                取引店舗
+                            </v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
                 </v-list-item-group>
             </v-list>
         </v-navigation-drawer>
@@ -88,7 +118,9 @@
             <Managers v-else-if="page === PAGE_MANAGERS"
                       @reload="reload"></Managers>
             <Staffs v-else-if="page === PAGE_STAFFS"
-                      @reload="reload"></Staffs>
+                    @reload="reload"></Staffs>
+            <Items v-else-if="page === PAGE_ITEMS"
+                   @reload="reload"></Items>
         </v-main>
         <ProfileModal ref="profileModal"></ProfileModal>
     </v-app>
@@ -101,14 +133,18 @@
     import Branches from "@/pages/mypage/branches/branches.vue";
     import Managers from "@/pages/mypage/managers/managers.vue";
     import Staffs from "@/pages/mypage/staffs/staffs.vue";
+    import Items from "@/pages/mypage/items/items.vue";
 
     const PAGE_BRANCHES = "branches";
     const PAGE_MANAGERS = "managers";
     const PAGE_STAFFS = "staffs";
+    const PAGE_ITEMS = "items";
+    const PAGE_SHOPS = "shops";
 
     export default {
         name: "mypage",
         components: {
+            Items,
             Staffs,
             Managers,
             Branches,
@@ -119,6 +155,8 @@
                 PAGE_BRANCHES: PAGE_BRANCHES,
                 PAGE_MANAGERS: PAGE_MANAGERS,
                 PAGE_STAFFS: PAGE_STAFFS,
+                PAGE_ITEMS: PAGE_ITEMS,
+                PAGE_SHOPS: PAGE_SHOPS,
 
                 logoImg: LogoImg,
 
@@ -155,6 +193,12 @@
                 } else if (to === PAGE_STAFFS) {
                     this.pageName = "スタッフ";
                     this.pageNum = 2;
+                } else if (to === PAGE_ITEMS) {
+                    this.pageName = "商品";
+                    this.pageNum = 3;
+                } else if (to === PAGE_SHOPS) {
+                    this.pageName = "取引店舗";
+                    this.pageNum = 4;
                 }
             },
 
