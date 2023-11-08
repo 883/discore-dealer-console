@@ -47,6 +47,7 @@
                                 <th>ID</th>
                                 <th>名前</th>
                                 <th>メーカー</th>
+                                <th>ディーラー在庫数</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -56,6 +57,7 @@
                                 <td>{{item.id}}</td>
                                 <td>{{item.name}}</td>
                                 <td>{{item.maker == null ? null : item.maker.name}}</td>
+                                <td>{{item.dealerStockCount}}</td>
                             </tr>
                             </tbody>
                         </template>
@@ -130,7 +132,8 @@
                             this.items.push({
                                 id: item.id,
                                 name: item.name,
-                                maker: item.maker
+                                maker: item.maker,
+                                dealerStockCount: item.dealer_stock_count
                             });
                         }
                     });

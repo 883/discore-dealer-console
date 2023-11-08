@@ -74,6 +74,10 @@
                         name: "メーカーID",
                         key: "maker_id"
                     },
+                    {
+                        name: "ディーラー在庫数",
+                        key: "dealer_stock_count"
+                    },
                 ],
                 form: {
                     columns: {
@@ -102,7 +106,8 @@
                             "wholesale_price",
                             "jan_code",
                             "identify_code",
-                            "maker_id"
+                            "maker_id",
+                            "dealer_stock_count"
                         ],
                         errorMessage: null
                     },
@@ -172,6 +177,8 @@
                                     this.form.csvFile.errorMessage = "商品識別コード列の値が重複しています";
                                 } else if (error.message === "maker_id not found") {
                                     this.form.csvFile.errorMessage = "メーカーID列の値が存在しません";
+                                } else if (error.message === "invalid dealer_stock_count") {
+                                    this.form.csvFile.errorMessage = "ディーラー在庫数列の値が異常です";
                                 }
                             }
                         }

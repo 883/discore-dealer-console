@@ -45,6 +45,10 @@
                           item-text="name"
                           item-value="id"
                           :color="$baseColor1"></v-select>
+                <v-text-field label="ディーラー在庫数"
+                              v-model="form.dealerStockCount.value"
+                              :error-messages="form.dealerStockCount.errorMessage"
+                              :color="$baseColor1"></v-text-field>
                 <v-btn depressed
                        :style="'background-color: '+$baseColor1+'; background-image: linear-gradient(135deg, '+$baseColor1+' 0%, '+$baseColor2+' 100%);'"
                        dark
@@ -94,6 +98,10 @@
                     makerId: {
                         value: null,
                         errorMessage: null
+                    },
+                    dealerStockCount: {
+                        value: null,
+                        errorMessage: null
                     }
                 }
             }
@@ -136,6 +144,10 @@
                     makerId: {
                         value: null,
                         errorMessage: null
+                    },
+                    dealerStockCount: {
+                        value: null,
+                        errorMessage: null
                     }
                 };
                 this.$axios.get("makers?limit=1000")
@@ -157,6 +169,7 @@
                         this.form.janCode.value = res.data.jan_code;
                         this.form.identifyCode.value = res.data.identify_code;
                         this.form.makerId.value = res.data.maker == null ? null : res.data.maker.id;
+                        this.form.dealerStockCount.value = res.data.dealer_stock_count;
                         this.old = JSON.parse(JSON.stringify(this.form));
                     });
             },
@@ -171,6 +184,7 @@
                 this.form.janCode.errorMessage = null;
                 this.form.identifyCode.errorMessage = null;
                 this.form.makerId.errorMessage = null;
+                this.form.dealerStockCount.errorMessage = null;
 
                 var params = {};
                 if (this.form.name.value !== this.old.name.value) {
@@ -190,6 +204,9 @@
                 }
                 if (this.form.makerId.value !== this.old.makerId.value) {
                     params.maker_id = this.form.makerId.value;
+                }
+                if (this.form.dealerStockCount.value !== this.old.dealerStockCount.value) {
+                    params.dealer_stock_count = this.form.dealerStockCount.value;
                 }
                 this.$axios.patch("items/" + this.form.id.value, params).then(res => {
                     alert("更新しました。");
@@ -227,6 +244,12 @@
                                 } else if (error.parameter === "identify_code") {
                                     if (error.message === "already exists") {
                                         this.form.identifyCode.errorMessage = "すでに存在しています";
+                                    }
+                                } else if (error.parameter === "dealer_stock_count") {
+                                    if (error.message === "not null") {
+                                        this.form.dealerStockCount.errorMessage = "null更新は不可です";
+                                    } else if (error.message === "invalid value") {
+                                        this.form.dealerStockCount.errorMessage = "入力値が異常です";
                                     }
                                 }
                             }

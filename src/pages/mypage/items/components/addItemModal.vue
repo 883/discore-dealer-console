@@ -45,6 +45,10 @@
                           item-text="name"
                           item-value="id"
                           :color="$baseColor1"></v-select>
+                <v-text-field label="ディーラー在庫数"
+                              v-model="form.dealerStockCount.value"
+                              :error-messages="form.dealerStockCount.errorMessage"
+                              :color="$baseColor1"></v-text-field>
                 <v-btn depressed
                        :style="'background-color: '+$baseColor1+'; background-image: linear-gradient(135deg, '+$baseColor1+' 0%, '+$baseColor2+' 100%);'"
                        dark
@@ -87,6 +91,10 @@
                     makerId: {
                         value: null,
                         errorMessage: null
+                    },
+                    dealerStockCount: {
+                        value: 0,
+                        errorMessage: null
                     }
                 }
             }
@@ -122,6 +130,10 @@
                     makerId: {
                         value: null,
                         errorMessage: null
+                    },
+                    dealerStockCount: {
+                        value: 0,
+                        errorMessage: null
                     }
                 };
                 this.isView = true;
@@ -147,6 +159,7 @@
                 this.form.janCode.errorMessage = null;
                 this.form.identifyCode.errorMessage = null;
                 this.form.makerId.errorMessage = null;
+                this.form.dealerStockCount.errorMessage = null;
 
                 this.$axios.post("/items", {
                     name: this.form.name.value,
@@ -155,6 +168,7 @@
                     jan_code: this.form.janCode.value,
                     identify_code: this.form.identifyCode.value,
                     maker_id: this.form.makerId.value,
+                    dealer_stock_count: this.form.dealerStockCount.value
                 }).then(res => {
                     alert("登録しました。");
                     this.$emit("reload");
@@ -198,6 +212,10 @@
                                         this.form.identifyCode.errorMessage = "入力値が異常です";
                                     } else if (error.message === "already exists") {
                                         this.form.identifyCode.errorMessage = "すでに存在します";
+                                    }
+                                } else if (error.parameter === "dealer_stock_count") {
+                                    if (error.message === "invalid value") {
+                                        this.form.dealerStockCount.errorMessage = "入力値が異常です";
                                     }
                                 }
                             }
