@@ -33,6 +33,10 @@
                     <v-btn depressed
                            outlined
                            :color="$baseColor1"
+                           @click="$refs.csvModal.open()">CSV</v-btn>
+                    <v-btn depressed
+                           outlined
+                           :color="$baseColor1"
                            @click="$refs.makersModal.open()">メーカー管理</v-btn>
 
                     <!--テーブル-->
@@ -70,6 +74,8 @@
                       @reload="reload"></AddItemModal>
         <ItemModal ref="itemModal"
                    @reload="reload"></ItemModal>
+        <CsvModal ref="csvModal"
+                  @reload="reload"></CsvModal>
         <MakersModal ref="makersModal"></MakersModal>
     </div>
 </template>
@@ -78,10 +84,11 @@
     import AddItemModal from "@/pages/mypage/items/components/addItemModal.vue";
     import MakersModal from "@/pages/mypage/items/components/makersModal.vue";
     import ItemModal from "@/components/itemModal.vue";
+    import CsvModal from "@/pages/mypage/items/components/csvModal.vue";
     const LIMIT = 10;
     export default {
         name: "items",
-        components: {ItemModal, MakersModal, AddItemModal},
+        components: {CsvModal, ItemModal, MakersModal, AddItemModal},
         data () {
             return {
                 currentPage: 1,
