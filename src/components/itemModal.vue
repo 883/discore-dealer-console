@@ -3,70 +3,104 @@
         <v-card>
             <DialogHeader title="商品詳細"
                           @close="isView = false"> </DialogHeader>
-            <v-card-text>
-                <v-text-field label="名前"
-                              v-model="form.name.value"
-                              :error-messages="form.name.errorMessage"
-                              :color="$baseColor1"></v-text-field>
-                <v-row>
-                    <v-col cols="6">
-                        <v-text-field label="小売価格（税抜）"
-                                      v-model="form.retailPrice.value"
-                                      :error-messages="form.retailPrice.errorMessage"
-                                      prefix="¥"
+            <v-tabs :color="$baseColor1">
+                <v-tab>情報</v-tab>
+                <v-tab>在庫</v-tab>
+
+                <v-tab-item>
+                    <v-card-text>
+                        <v-text-field label="名前"
+                                      v-model="form.name.value"
+                                      :error-messages="form.name.errorMessage"
                                       :color="$baseColor1"></v-text-field>
-                    </v-col>
-                    <v-col cols="6">
-                        <v-text-field label="卸売価格（税抜）"
-                                      v-model="form.wholesalePrice.value"
-                                      :error-messages="form.wholesalePrice.errorMessage"
-                                      prefix="¥"
+                        <v-row>
+                            <v-col cols="6">
+                                <v-text-field label="小売価格（税抜）"
+                                              v-model="form.retailPrice.value"
+                                              :error-messages="form.retailPrice.errorMessage"
+                                              prefix="¥"
+                                              :color="$baseColor1"></v-text-field>
+                            </v-col>
+                            <v-col cols="6">
+                                <v-text-field label="卸売価格（税抜）"
+                                              v-model="form.wholesalePrice.value"
+                                              :error-messages="form.wholesalePrice.errorMessage"
+                                              prefix="¥"
+                                              :color="$baseColor1"></v-text-field>
+                            </v-col>
+                        </v-row>
+                        <v-row>
+                            <v-col cols="6">
+                                <v-text-field label="JANコード"
+                                              v-model="form.janCode.value"
+                                              :error-messages="form.janCode.errorMessage"
+                                              :color="$baseColor1"></v-text-field>
+                            </v-col>
+                            <v-col cols="6">
+                                <v-text-field label="商品識別コード"
+                                              v-model="form.identifyCode.value"
+                                              :error-messages="form.identifyCode.errorMessage"
+                                              :color="$baseColor1"></v-text-field>
+                            </v-col>
+                        </v-row>
+                        <v-select label="メーカー"
+                                  v-model="form.makerId.value"
+                                  :error-messages="form.makerId.errorMessage"
+                                  :items="makers"
+                                  item-text="name"
+                                  item-value="id"
+                                  :color="$baseColor1"></v-select>
+                        <v-text-field label="ディーラー在庫数"
+                                      v-model="form.dealerStockCount.value"
+                                      :error-messages="form.dealerStockCount.errorMessage"
                                       :color="$baseColor1"></v-text-field>
-                    </v-col>
-                </v-row>
-                <v-row>
-                    <v-col cols="6">
-                        <v-text-field label="JANコード"
-                                      v-model="form.janCode.value"
-                                      :error-messages="form.janCode.errorMessage"
-                                      :color="$baseColor1"></v-text-field>
-                    </v-col>
-                    <v-col cols="6">
-                        <v-text-field label="商品識別コード"
-                                      v-model="form.identifyCode.value"
-                                      :error-messages="form.identifyCode.errorMessage"
-                                      :color="$baseColor1"></v-text-field>
-                    </v-col>
-                </v-row>
-                <v-select label="メーカー"
-                          v-model="form.makerId.value"
-                          :error-messages="form.makerId.errorMessage"
-                          :items="makers"
-                          item-text="name"
-                          item-value="id"
-                          :color="$baseColor1"></v-select>
-                <v-text-field label="ディーラー在庫数"
-                              v-model="form.dealerStockCount.value"
-                              :error-messages="form.dealerStockCount.errorMessage"
-                              :color="$baseColor1"></v-text-field>
-                <v-btn depressed
-                       :style="'background-color: '+$baseColor1+'; background-image: linear-gradient(135deg, '+$baseColor1+' 0%, '+$baseColor2+' 100%);'"
-                       dark
-                       @click="save">保存</v-btn>
-                <v-btn depressed
-                       color="red"
-                       dark
-                       @click="deleteItem">削除</v-btn>
-            </v-card-text>
+                        <v-btn depressed
+                               :style="'background-color: '+$baseColor1+'; background-image: linear-gradient(135deg, '+$baseColor1+' 0%, '+$baseColor2+' 100%);'"
+                               dark
+                               @click="save">保存</v-btn>
+                        <v-btn depressed
+                               color="red"
+                               dark
+                               @click="deleteItem">削除</v-btn>
+                    </v-card-text>
+                </v-tab-item>
+                <v-tab-item>
+                    <v-card-text>
+                        <v-simple-table>
+                            <template v-slot:default>
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>支店名</th>
+                                    <th>在庫数</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr v-for="(branch, i) in branches"
+                                    :key="i"
+                                    @click="$refs.allocateModal.open(form, branch)">
+                                    <td>{{branch.id}}</td>
+                                    <td>{{branch.name}}</td>
+                                    <td>{{branch.stockCount}}</td>
+                                </tr>
+                                </tbody>
+                            </template>
+                        </v-simple-table>
+                    </v-card-text>
+                </v-tab-item>
+            </v-tabs>
         </v-card>
+        <AllocateModal ref="allocateModal"
+                       @reload="reload"></AllocateModal>
     </v-dialog>
 </template>
 
 <script>
     import DialogHeader from "@/components/dialogHeader";
+    import AllocateModal from "@/pages/mypage/items/components/allocateModal.vue";
     export default {
         name: "itemModal",
-        components: {DialogHeader},
+        components: {AllocateModal, DialogHeader},
         data() {
             return {
                 isView: false,
@@ -103,7 +137,8 @@
                         value: null,
                         errorMessage: null
                     }
-                }
+                },
+                branches: []
             }
         },
         methods: {
@@ -160,6 +195,11 @@
                             });
                         }
                     });
+                this.reload();
+            },
+            reload()
+            {
+                this.branches = [];
                 this.$axios.get("items/" + this.form.id.value)
                     .then(res => {
                         this.isView = true;
@@ -171,6 +211,15 @@
                         this.form.makerId.value = res.data.maker == null ? null : res.data.maker.id;
                         this.form.dealerStockCount.value = res.data.dealer_stock_count;
                         this.old = JSON.parse(JSON.stringify(this.form));
+
+                        for (var i in res.data.branches) {
+                            var branch = res.data.branches[i];
+                            this.branches.push({
+                                id: branch.id,
+                                name: branch.name,
+                                stockCount: branch.stock_count
+                            });
+                        }
                     });
             },
             /**
