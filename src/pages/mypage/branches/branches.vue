@@ -36,6 +36,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>名前</th>
+                                <th>所属スタッフ数</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -44,6 +45,7 @@
                                 @click="$refs.branchModal.open(branch.id)">
                                 <td>{{branch.id}}</td>
                                 <td>{{branch.name}}</td>
+                                <td>{{branch.staffCount}}</td>
                             </tr>
                             </tbody>
                         </template>
@@ -115,6 +117,7 @@
                             this.branches.push({
                                 id: branch.id,
                                 name: branch.name,
+                                staffCount: branch.staff_count
                             });
                         }
                     });

@@ -46,6 +46,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>名前</th>
+                                <th>所属支店</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -54,6 +55,7 @@
                                 @click="$refs.staffModal.open(staff.id)">
                                 <td>{{staff.id}}</td>
                                 <td>{{staff.name}}</td>
+                                <td>{{staff.branch.name}}</td>
                             </tr>
                             </tbody>
                         </template>
@@ -133,6 +135,7 @@
                             this.staffs.push({
                                 id: staff.id,
                                 name: staff.name,
+                                branch: staff.branch
                             });
                         }
                     });
