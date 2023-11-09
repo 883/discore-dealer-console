@@ -7,15 +7,15 @@
         <div class="login">
             <v-form v-if="!isSent" class="login form">
                 <v-text-field label="メールアドレス"
-                              color="#9599E2"
+                              :color="$baseColor1"
                               v-model="passwordReminder.email"></v-text-field>
                 <v-btn @click="send"
                        depressed
                        block
                        dark
-                       style="background-color: #9599E2; background-image: linear-gradient(135deg, #9599E2 0%, #8BC6EC 100%);">送信</v-btn>
+                       :style="'background-color: '+$baseColor1+'; background-image: linear-gradient(135deg, '+$baseColor1+' 0%, '+$baseColor2+' 100%);'">送信</v-btn>
                 <v-btn text
-                       color="#9599E2"
+                       :color="$baseColor1"
                        @click="$router.push('/login')">ログイン画面に戻る</v-btn>
             </v-form>
             <div v-else
@@ -23,7 +23,7 @@
                 入力されたメールアドレスに一時パスワードを送信しました。<br>
                 一時パスワードを用いてログインすることが可能です。<br>
                 <v-btn text
-                       color="#9599E2"
+                       :color="$baseColor1"
                        @click="$router.push('/login')">ログイン画面に戻る</v-btn>
             </div>
         </div>

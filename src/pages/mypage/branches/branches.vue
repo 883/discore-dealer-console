@@ -54,7 +54,7 @@
                     <!--ページャ-->
                     <v-pagination v-model="currentPage"
                                   :length="pageLength"
-                                  color="indigo"
+                                  :color="$baseColor1"
                                   circle
                                   @input="reload"></v-pagination>
                 </div>
