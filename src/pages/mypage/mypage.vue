@@ -66,21 +66,6 @@
                             </v-list-item-title>
                         </v-list-item-content>
                     </v-list-item>
-                    <v-list-item @click="selectMainMenu(PAGE_SHOPS)">
-                        <v-list-item-content>
-                            <v-badge v-if="alertCount.items > 0"
-                                     :content="alertCount.items"
-                                     inline
-                                     :color="$baseColor1">
-                                <v-list-item-title>
-                                    取引店舗
-                                </v-list-item-title>
-                            </v-badge>
-                            <v-list-item-title v-else>
-                                取引店舗
-                            </v-list-item-title>
-                        </v-list-item-content>
-                    </v-list-item>
                 </v-list-item-group>
             </v-list>
         </v-navigation-drawer>
@@ -139,7 +124,6 @@
     const PAGE_MANAGERS = "managers";
     const PAGE_STAFFS = "staffs";
     const PAGE_ITEMS = "items";
-    const PAGE_SHOPS = "shops";
 
     export default {
         name: "mypage",
@@ -156,7 +140,6 @@
                 PAGE_MANAGERS: PAGE_MANAGERS,
                 PAGE_STAFFS: PAGE_STAFFS,
                 PAGE_ITEMS: PAGE_ITEMS,
-                PAGE_SHOPS: PAGE_SHOPS,
 
                 logoImg: LogoImg,
 
@@ -196,9 +179,6 @@
                 } else if (to === PAGE_ITEMS) {
                     this.pageName = "商品";
                     this.pageNum = 3;
-                } else if (to === PAGE_SHOPS) {
-                    this.pageName = "取引店舗";
-                    this.pageNum = 4;
                 }
             },
 

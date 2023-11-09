@@ -197,6 +197,9 @@
                     });
                 this.reload();
             },
+            /**
+             * 情報を更新
+             */
             reload()
             {
                 this.branches = [];
@@ -220,6 +223,7 @@
                                 stockCount: branch.stock_count
                             });
                         }
+                        this.$emit("reload");
                     });
             },
             /**
