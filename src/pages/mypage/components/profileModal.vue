@@ -21,7 +21,7 @@
                                       readonly></v-text-field>
                         <v-btn v-if="isRoot"
                                depressed
-                               :style="'background-color: '+$baseColor1+'; background-image: linear-gradient(135deg, '+$baseColor1+' 0%, '+$baseColor2+' 100%);'"
+                               :style="$baseColorStyle"
                                dark
                                @click="saveDealer">保存</v-btn>
                     </v-card-text>
@@ -46,7 +46,7 @@
                                       :error-messages="manager.passwordConfirm.errorMessage"
                                       :color="$baseColor1"></v-text-field>
                         <v-btn depressed
-                               :style="'background-color: '+$baseColor1+'; background-image: linear-gradient(135deg, '+$baseColor1+' 0%, '+$baseColor2+' 100%);'"
+                               :style="$baseColorStyle"
                                dark
                                @click="saveManager">保存</v-btn>
                     </v-card-text>

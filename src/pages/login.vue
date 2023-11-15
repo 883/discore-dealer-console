@@ -20,7 +20,7 @@
                        depressed
                        block
                        dark
-                       :style="'background-color: '+$baseColor1+'; background-image: linear-gradient(135deg, '+$baseColor1+' 0%, '+$baseColor2+' 100%);'">ログイン</v-btn>
+                       :style="$baseColorStyle">ログイン</v-btn>
                 <v-btn text
                        :color="$baseColor1"
                        @click="$router.push('/passwordReminder')">初回ログイン・パスワードを忘れた方はこちら</v-btn>

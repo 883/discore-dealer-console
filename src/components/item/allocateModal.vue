@@ -16,7 +16,7 @@
                               persistent-hint
                               :color="$baseColor1"></v-text-field>
                 <v-btn depressed
-                       :style="'background-color: '+$baseColor1+'; background-image: linear-gradient(135deg, '+$baseColor1+' 0%, '+$baseColor2+' 100%);'"
+                       :style="$baseColorStyle"
                        dark
                        @click="allocate">割り当てる</v-btn>
             </v-card-text>

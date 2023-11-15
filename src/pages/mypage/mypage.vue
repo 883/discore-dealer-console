@@ -72,7 +72,7 @@
 
         <!--アプリケーションヘッダ-->
         <v-app-bar app
-                   :style="'background-color: '+$baseColor1+'; background-image: linear-gradient(135deg, '+$baseColor1+' 0%, '+$baseColor2+' 100%);'"
+                   :style="$baseColorStyle"
                    dark>
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
             <v-toolbar-title>{{pageName}}</v-toolbar-title>
@@ -154,7 +154,7 @@
         },
         created () {
             // 通知数を取得
-            this.getBranchesAlertCount();
+            this.reload();
 
             this.selectMainMenu(this.PAGE_BRANCHES);
         },
@@ -185,12 +185,13 @@
             /**
              *
              */
-            getBranchesAlertCount()
+            getItemsAlertCount()
             {
-                //this.$axios.get("stylists?search_has_new_message=true")
-                //    .then(response => {
-                //        this.alertCount.stylist = response.data.total_count;
-                //    });
+                this.$axios.get("item_allocation_requests?search_status=waiting")
+                    .then(res => {
+                        this.alertCount.items = res.data.total_count;
+                        this.$forceUpdate();
+                    });
             },
 
             /**
@@ -198,7 +199,7 @@
              */
             reload()
             {
-                this.getBranchesAlertCount();
+                this.getItemsAlertCount();
             },
             /**
              * ログアウトする

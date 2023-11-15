@@ -18,7 +18,7 @@
                                   item-value="key"
                                   :color="$baseColor1"></v-select>
                         <v-btn depressed
-                               :style="'background-color: '+$baseColor1+'; background-image: linear-gradient(135deg, '+$baseColor1+' 0%, '+$baseColor2+' 100%);'"
+                               :style="$baseColorStyle"
                                dark
                                @click="download">ダウンロード</v-btn>
                     </v-card-text>
@@ -31,7 +31,7 @@
                                       accept="text/plain"
                                       :color="$baseColor1"></v-file-input>
                         <v-btn depressed
-                               :style="'background-color: '+$baseColor1+'; background-image: linear-gradient(135deg, '+$baseColor1+' 0%, '+$baseColor2+' 100%);'"
+                               :style="$baseColorStyle"
                                dark
                                @click="upload">アップロード</v-btn>
                     </v-card-text>

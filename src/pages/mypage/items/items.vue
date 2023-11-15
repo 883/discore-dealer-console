@@ -9,7 +9,7 @@
                                   v-model="searchForm.name"
                                   :color="$baseColor1"></v-text-field>
 
-                    <v-btn :style="'background-color: '+$baseColor1+'; background-image: linear-gradient(135deg, '+$baseColor1+' 0%, '+$baseColor2+' 100%);'"
+                    <v-btn :style="$baseColorStyle"
                            dark
                            depressed
                            @click="reload">検索</v-btn>
@@ -38,6 +38,10 @@
                            outlined
                            :color="$baseColor1"
                            @click="$refs.makersModal.open()">メーカー管理</v-btn>
+                    <v-btn depressed
+                           outlined
+                           :color="$baseColor1"
+                           @click="$refs.itemAllocationRequestsModal.open()">在庫割り当てリクエスト</v-btn>
 
                     <!--テーブル-->
                     <v-simple-table>
@@ -79,18 +83,21 @@
         <CsvModal ref="csvModal"
                   @reload="reload"></CsvModal>
         <MakersModal ref="makersModal"></MakersModal>
+        <ItemAllocationRequestsModal ref="itemAllocationRequestsModal"
+                                     @reload="reload"></ItemAllocationRequestsModal>
     </div>
 </template>
 
 <script>
     import AddItemModal from "@/pages/mypage/items/components/addItemModal.vue";
     import MakersModal from "@/pages/mypage/items/components/makersModal.vue";
-    import ItemModal from "@/components/itemModal.vue";
+    import ItemModal from "@/components/item/itemModal.vue";
     import CsvModal from "@/pages/mypage/items/components/csvModal.vue";
+    import ItemAllocationRequestsModal from "@/pages/mypage/items/components/itemAllocationRequestsModal.vue";
     const LIMIT = 10;
     export default {
         name: "items",
-        components: {CsvModal, ItemModal, MakersModal, AddItemModal},
+        components: {ItemAllocationRequestsModal, CsvModal, ItemModal, MakersModal, AddItemModal},
         data () {
             return {
                 currentPage: 1,

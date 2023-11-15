@@ -20,7 +20,7 @@
                           :error-messages="form.branchId.errorMessage"
                           :color="$baseColor1"></v-select>
                 <v-btn depressed
-                       :style="'background-color: '+$baseColor1+'; background-image: linear-gradient(135deg, '+$baseColor1+' 0%, '+$baseColor2+' 100%);'"
+                       :style="$baseColorStyle"
                        dark
                        @click="save">登録</v-btn>
             </v-card-text>

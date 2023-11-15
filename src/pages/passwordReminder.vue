@@ -13,7 +13,7 @@
                        depressed
                        block
                        dark
-                       :style="'background-color: '+$baseColor1+'; background-image: linear-gradient(135deg, '+$baseColor1+' 0%, '+$baseColor2+' 100%);'">送信</v-btn>
+                       :style="$baseColorStyle">送信</v-btn>
                 <v-btn text
                        :color="$baseColor1"
                        @click="$router.push('/login')">ログイン画面に戻る</v-btn>
