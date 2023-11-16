@@ -107,11 +107,12 @@ export default {
     background-color: #f7f9fb;
 }
 .login {
+    text-align: center;
     padding: 20px;
     height: 500px;
 }
 .login .form {
-    width: 300px;
+    width: 400px;
     height: 200px;
     margin: 0 auto;
 }
