@@ -19,6 +19,10 @@
                                       v-model="dealer.name.value"
                                       :color="$baseColor1"
                                       readonly></v-text-field>
+                        <v-text-field label="送料のデフォルト値"
+                                      v-model="dealer.defaultPostage.value"
+                                      prefix="¥"
+                                      :color="$baseColor1"></v-text-field>
                         <v-btn v-if="isRoot"
                                depressed
                                :style="$baseColorStyle"
@@ -76,6 +80,10 @@
                         value: null,
                         errorMessage: null
                     },
+                    defaultPostage: {
+                        value: null,
+                        errorMessage: null
+                    },
                 },
                 manager: {
                     id: {
@@ -111,6 +119,10 @@
                         value: null
                     },
                     name: {
+                        value: null,
+                        errorMessage: null
+                    },
+                    defaultPostage: {
                         value: null,
                         errorMessage: null
                     },
@@ -155,6 +167,7 @@
                 this.$axios.get("/dealer")
                     .then(res => {
                         this.dealer.name.value = res.data.name;
+                        this.dealer.defaultPostage.value = res.data.default_postage;
                         this.oldDealer = JSON.parse(JSON.stringify(this.dealer));
                     });
             },
@@ -168,6 +181,9 @@
                 var params = { };
                 if (this.oldDealer.name.value !== this.dealer.name.value) {
                     params.name = this.dealer.name.value;
+                }
+                if (this.oldDealer.defaultPostage.value !== this.dealer.defaultPostage.value) {
+                    params.default_postage = this.dealer.defaultPostage.value;
                 }
 
                 this.$axios.patch("/dealer", params)
