@@ -66,6 +66,21 @@
                             </v-list-item-title>
                         </v-list-item-content>
                     </v-list-item>
+                    <v-list-item @click="selectMainMenu(PAGE_REPORT)">
+                        <v-list-item-content>
+                            <v-badge v-if="alertCount.report > 0"
+                                     :content="alertCount.report"
+                                     inline
+                                     :color="$baseColor1">
+                                <v-list-item-title>
+                                    レポート
+                                </v-list-item-title>
+                            </v-badge>
+                            <v-list-item-title v-else>
+                                レポート
+                            </v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
                 </v-list-item-group>
             </v-list>
         </v-navigation-drawer>
@@ -106,6 +121,7 @@
                     @reload="reload"></Staffs>
             <Items v-else-if="page === PAGE_ITEMS"
                    @reload="reload"></Items>
+            <Report v-else-if="page === PAGE_REPORT"></Report>
         </v-main>
         <ProfileModal ref="profileModal"></ProfileModal>
     </v-app>
@@ -119,15 +135,18 @@
     import Managers from "@/pages/mypage/managers/managers.vue";
     import Staffs from "@/pages/mypage/staffs/staffs.vue";
     import Items from "@/pages/mypage/items/items.vue";
+    import Report from "@/pages/mypage/report/report.vue";
 
     const PAGE_BRANCHES = "branches";
     const PAGE_MANAGERS = "managers";
     const PAGE_STAFFS = "staffs";
     const PAGE_ITEMS = "items";
+    const PAGE_REPORT = "report";
 
     export default {
         name: "mypage",
         components: {
+            Report,
             Items,
             Staffs,
             Managers,
@@ -140,6 +159,7 @@
                 PAGE_MANAGERS: PAGE_MANAGERS,
                 PAGE_STAFFS: PAGE_STAFFS,
                 PAGE_ITEMS: PAGE_ITEMS,
+                PAGE_REPORT: PAGE_REPORT,
 
                 logoImg: LogoImg,
 
@@ -179,6 +199,9 @@
                 } else if (to === PAGE_ITEMS) {
                     this.pageName = "商品";
                     this.pageNum = 3;
+                } else if (to === PAGE_REPORT) {
+                    this.pageName = "レポート";
+                    this.pageNum = 4;
                 }
             },
 
