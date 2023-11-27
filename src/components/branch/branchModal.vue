@@ -173,7 +173,6 @@
                 if (this.form.fax.value !== this.old.fax.value) {
                     params.fax = this.form.fax.value;
                 }
-                console.log(params);
 
                 this.$axios.patch("/branches/" + this.form.id.value, params).then(res => {
                     alert("更新しました。");

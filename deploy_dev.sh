@@ -1,2 +1,2 @@
-rsync --delete -av -e "ssh -p 8022" ./ shino@bireki.shino07:/home/shino/discore-manager-console/
+rsync --delete -av -e "ssh -p 8022" ./ shino@discore.shino01:/home/shino/discore-manager-console/
 
