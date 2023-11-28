@@ -5,7 +5,7 @@
                           @close="isView = false"> </DialogHeader>
             <v-tabs :color="$baseColor1">
                 <v-tab> ディーラー情報 </v-tab>
-                <v-tab> メンバー情報 </v-tab>
+                <v-tab> マネージャー情報 </v-tab>
 
                 <v-tab-item class="tabBody">
                     <v-card-text>
@@ -205,7 +205,7 @@
                     });
             },
             /**
-             * メンバー情報を保存
+             * マネージャー情報を保存
              */
             saveManager()
             {
@@ -224,7 +224,7 @@
 
                 this.$axios.patch("", params)
                     .then(res => {
-                        alert("メンバー情報を更新しました。");
+                        alert("マネージャー情報を更新しました。");
                         this.manager.password.value = null;
                         this.manager.passwordConfirm.value = null;
                     })
