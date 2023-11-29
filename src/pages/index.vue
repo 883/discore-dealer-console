@@ -8,7 +8,7 @@
         name: "index",
         created()
         {
-            if (this.$cookies.isKey("access_token")) {
+            if (this.$cookies.isKey("manager.access_token")) {
                 this.$router.push({
                     path: '/myPage',
                     query: {

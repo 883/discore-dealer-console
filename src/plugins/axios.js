@@ -21,8 +21,8 @@ export default {
         http.interceptors.request.use((request) => {
             var headers = {};
             // アクセストークンをセット
-            if (Vue.$cookies.isKey("access_token")) {
-                headers["Authorization"] = "Bearer " + Vue.$cookies.get("access_token");
+            if (Vue.$cookies.isKey("manager.access_token")) {
+                headers["Authorization"] = "Bearer " + Vue.$cookies.get("manager.access_token");
             }
 
             request.headers = headers;
@@ -61,8 +61,8 @@ export default {
 
                 // エラーの原因が認証の場合、ログイン画面に戻る
                 if (isErrorFromAuthorization) {
-                    Vue.$cookies.remove("access_token");
-                    Vue.$cookies.remove("admin_id");
+                    Vue.$cookies.remove("manager.access_token");
+                    Vue.$cookies.remove("manager.admin_id");
                     router.push("/login");
 
                 } else {

@@ -231,13 +231,13 @@
             {
                 this.$axios.post("/logout")
                     .then(res => {
-                      this.$cookies.remove("access_token");
-                      this.$cookies.remove("admin_id");
+                      this.$cookies.remove("manager.access_token");
+                      this.$cookies.remove("manager.admin_id");
                       this.$router.push('/login');
                     })
                     .catch(e => {
-                      this.$cookies.remove("access_token");
-                      this.$cookies.remove("admin_id");
+                      this.$cookies.remove("manager.access_token");
+                      this.$cookies.remove("manager.admin_id");
                       this.$router.push('/login');
                     });
             }
