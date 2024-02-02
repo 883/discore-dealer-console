@@ -2,7 +2,7 @@
     <div class="app">
         <div style="text-align: center">
             <img :src="logoImg" style="width: 200px; margin-top: 50px;">
-            <h4>DISCOREマネージャー画面</h4>
+            <h4>マネージャー画面</h4>
         </div>
         <div class="login">
             <v-form class="login form"
